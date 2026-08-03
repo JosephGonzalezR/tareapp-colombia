@@ -1,0 +1,696 @@
+/**
+ * Tareapp Colombia Landing v6 (2026 Futurista)
+ * Replica del molde de Chile (E:\tareapp-landing) para COLOMBIA / Bogota.
+ * Edita CONFIG para personalizar: WhatsApp, ubicación, enlaces, etc.
+ *
+ * LEY AGS: cada país es independiente en NÚMERO y en DOMINIO. Acá va SOLO la
+ * línea de Colombia y el dominio tareapp.colombia.ags-ed.com.
+ */
+const CONFIG = {
+  brand: "Tareapp",
+  whatsappNumber: "5726207344",
+  whatsappDisplay: "+57 2 620 7344",
+  location: "Bogotá, Colombia",
+  // Colombia todavía no tiene cuentas propias de redes sociales. Se dejan
+  // vacías a propósito: NUNCA enlazar las cuentas de otro país.
+  facebookUrl: "",
+  tiktokUrl: "",
+  instagramUrl: "",
+
+  // Indicadores (opcional). Si no deseas números, deja en "—".
+  stat1Value: "300+",
+  stat1Label: "Proyectos elaborados",
+  stat2Value: "5+",
+  stat2Label: "Formatos de citación",
+  stat3Value: "4",
+  stat3Label: "Etapas de desarrollo",
+};
+
+/** Configuración por página */
+const PAGE_CONFIG = {
+  trabajos: {
+    stat1Value: "500+",
+    stat1Label: "Trabajos entregados",
+    stat2Value: "10+",
+    stat2Label: "Tipos de trabajo",
+    stat3Value: "15+",
+    stat3Label: "Instituciones cubiertas",
+  },
+  tesis: {
+    stat1Value: "300+",
+    stat1Label: "Proyectos elaborados",
+    stat2Value: "5+",
+    stat2Label: "Formatos de citación",
+    stat3Value: "4",
+    stat3Label: "Etapas de desarrollo",
+  },
+};
+
+function getPage() {
+  return document.body.getAttribute("data-page") || "tesis";
+}
+
+function buildWhatsAppUrl(message) {
+  const base = `https://wa.me/${CONFIG.whatsappNumber}`;
+  const text = encodeURIComponent(message || "");
+  return `${base}?text=${text}`;
+}
+
+function bindConfig() {
+  // Aplicar configuración de página
+  const page = getPage();
+  const pageConf = PAGE_CONFIG[page];
+  if (pageConf) {
+    Object.assign(CONFIG, pageConf);
+  }
+
+  document.querySelectorAll("[data-bind]").forEach((el) => {
+    const key = el.getAttribute("data-bind");
+    if (CONFIG[key] !== undefined) el.textContent = CONFIG[key];
+  });
+
+  document.querySelectorAll("[data-href]").forEach((el) => {
+    const key = el.getAttribute("data-href");
+    if (CONFIG[key]) el.setAttribute("href", CONFIG[key]);
+  });
+}
+
+function bindWhatsAppLinks() {
+  const waEls = document.querySelectorAll("[data-wa-message]");
+  waEls.forEach((el) => {
+    const msg = el.getAttribute("data-wa-message") || "";
+    el.setAttribute("href", buildWhatsAppUrl(msg));
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener");
+  });
+}
+
+function setupMobileMenu() {
+  const btn = document.getElementById("menuBtn");
+  const menu = document.getElementById("mobileMenu");
+  if (!btn || !menu) return;
+
+  btn.addEventListener("click", () => {
+    const expanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!expanded));
+    menu.hidden = expanded;
+  });
+
+  // Cerrar al hacer clic en un link
+  menu.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      btn.setAttribute("aria-expanded", "false");
+      menu.hidden = true;
+    });
+  });
+
+  // Cerrar con Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      btn.setAttribute("aria-expanded", "false");
+      menu.hidden = true;
+    }
+  });
+}
+
+function setupReveal() {
+  const els = document.querySelectorAll("[data-reveal]");
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((el) => el.classList.add("revealed"));
+    return;
+  }
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add("revealed");
+          obs.unobserve(e.target);
+        }
+      }
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+  );
+
+  els.forEach((el) => obs.observe(el));
+
+  // RED DE SEGURIDAD (2026-07-02): si el observador no dispara (iframes,
+  // navegadores raros, scroll programático), NADA puede quedar invisible.
+  // A los 1.5s todo lo aún no revelado se muestra sí o sí.
+  setTimeout(() => {
+    document.querySelectorAll("[data-reveal]:not(.revealed)").forEach((el) => el.classList.add("revealed"));
+  }, 1500);
+}
+
+function setupAccordions() {
+  document.querySelectorAll(".accordion__btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      const panelId = btn.getAttribute("aria-controls");
+      const panel = panelId ? document.getElementById(panelId) : null;
+      if (!panel) return;
+
+      btn.setAttribute("aria-expanded", String(!expanded));
+      panel.hidden = expanded;
+    });
+  });
+}
+
+function setupFaqSearch() {
+  const input = document.getElementById("faqSearchInput");
+  const hint = document.getElementById("faqSearchHint");
+  const items = Array.from(document.querySelectorAll("[data-faq-item]"));
+  if (!input || !hint || items.length === 0) return;
+
+  const updateHint = (visibleCount) => {
+    const total = items.length;
+    hint.textContent = `${visibleCount}/${total}`;
+  };
+
+  const filter = () => {
+    const q = (input.value || "").toString().trim().toLowerCase();
+    if (!q) {
+      items.forEach((it) => (it.style.display = ""));
+      updateHint(items.length);
+      return;
+    }
+
+    let visible = 0;
+    items.forEach((it) => {
+      const text = it.textContent.toLowerCase();
+      const match = text.includes(q);
+      it.style.display = match ? "" : "none";
+      if (match) visible += 1;
+    });
+
+    updateHint(visible);
+  };
+
+  input.addEventListener("input", filter);
+  updateHint(items.length);
+}
+
+function setupForm() {
+  const form = document.getElementById("leadForm");
+  if (!form) return;
+
+  const page = getPage();
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const name = (data.get("name") || "").toString().trim();
+
+    let lines;
+
+    if (page === "trabajos") {
+      const institution = (data.get("institution") || "").toString().trim();
+      const workType = (data.get("workType") || "").toString().trim();
+      const date = (data.get("date") || "").toString().trim();
+      const message = (data.get("message") || "").toString().trim();
+
+      lines = [
+        `Hola, soy ${name}.`,
+        institution ? `Institución: ${institution}` : null,
+        workType ? `Tipo de trabajo: ${workType}` : null,
+        date ? `Fecha de entrega: ${date}` : null,
+        message ? `Detalle: ${message}` : null,
+        "",
+        "¿Me pueden cotizar este trabajo? Gracias.",
+      ].filter(Boolean);
+    } else {
+      const program = (data.get("program") || "").toString().trim();
+      const stage = (data.get("stage") || "").toString().trim();
+      const date = (data.get("date") || "").toString().trim();
+      const message = (data.get("message") || "").toString().trim();
+
+      lines = [
+        `Hola, soy ${name}.`,
+        program ? `Programa/Carrera: ${program}` : null,
+        stage ? `Etapa: ${stage}` : null,
+        date ? `Fecha tentativa: ${date}` : null,
+        message ? `Situación: ${message}` : null,
+        "",
+        "¿Podemos coordinar el desarrollo de mi investigación? Gracias.",
+      ].filter(Boolean);
+    }
+
+    const url = buildWhatsAppUrl(lines.join("\n"));
+    window.open(url, "_blank", "noopener");
+  });
+}
+
+function setupCopyWhatsApp() {
+  const btn = document.getElementById("copyWhatsAppBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", async () => {
+    const text = CONFIG.whatsappDisplay || "";
+    try {
+      await navigator.clipboard.writeText(text);
+      btn.textContent = "Copiado ✓";
+      setTimeout(() => (btn.textContent = "Copiar número"), 1400);
+    } catch {
+      alert(`Copia este número: ${text}`);
+    }
+  });
+}
+
+function setupToTop() {
+  const btn = document.getElementById("toTop");
+  if (!btn) return;
+
+  const onScroll = () => {
+    if (window.scrollY > 500) btn.classList.add("show");
+    else btn.classList.remove("show");
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+
+function setupYear() {
+  const y = document.getElementById("year");
+  if (y) y.textContent = String(new Date().getFullYear());
+}
+
+function setupScrollProgress() {
+  const bar = document.getElementById("scrollProgress");
+  if (!bar) return;
+
+  const onScroll = () => {
+    const doc = document.documentElement;
+    const scrollTop = doc.scrollTop || document.body.scrollTop || 0;
+    const height = doc.scrollHeight - doc.clientHeight;
+    const pct = height > 0 ? (scrollTop / height) * 100 : 0;
+    bar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+  };
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+  onScroll();
+}
+
+function setupScrollSpy() {
+  const nav = document.getElementById("navLinks");
+  if (!nav || !("IntersectionObserver" in window)) return;
+
+  const links = Array.from(nav.querySelectorAll('a[href^="#"]'));
+  const targets = links
+    .map((a) => {
+      const id = a.getAttribute("href").slice(1);
+      const el = document.getElementById(id);
+      return el ? { id, el } : null;
+    })
+    .filter(Boolean);
+
+  if (targets.length === 0) return;
+
+  const clear = () => {
+    links.forEach((a) => {
+      a.classList.remove("active");
+      a.removeAttribute("aria-current");
+    });
+  };
+
+  const setActive = (id) => {
+    clear();
+    const a = links.find((x) => x.getAttribute("href") === `#${id}`);
+    if (a) {
+      a.classList.add("active");
+      a.setAttribute("aria-current", "page");
+    }
+  };
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      // Elegir el que esté más visible
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0));
+
+      if (visible.length > 0) {
+        setActive(visible[0].target.id);
+      }
+    },
+    {
+      root: null,
+      threshold: [0.2, 0.35, 0.5, 0.65],
+      rootMargin: "-20% 0px -55% 0px",
+    }
+  );
+
+  targets.forEach(({ el }) => obs.observe(el));
+}
+
+
+
+
+
+function setupGSAP() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    setupReveal();
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  const handled = new Set();
+
+  // Cards en grids → stagger en cascada
+  document.querySelectorAll(".cards--3").forEach((grid) => {
+    const cards = Array.from(grid.querySelectorAll(".card"));
+    cards.forEach((c) => handled.add(c));
+    gsap.fromTo(cards,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.65, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: grid, start: "top 85%" } }
+    );
+  });
+
+  // Pasos del timeline → slide desde la izquierda
+  const steps = Array.from(document.querySelectorAll(".step"));
+  if (steps.length) {
+    steps.forEach((s) => handled.add(s));
+    gsap.fromTo(steps,
+      { opacity: 0, x: -40 },
+      { opacity: 1, x: 0, duration: 0.6, stagger: 0.15, ease: "back.out(1.2)",
+        scrollTrigger: { trigger: steps[0].parentElement, start: "top 80%" } }
+    );
+  }
+
+  // Entregables → stagger
+  const delivs = Array.from(document.querySelectorAll(".deliverable"));
+  if (delivs.length) {
+    delivs.forEach((d) => handled.add(d));
+    gsap.fromTo(delivs,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.55, stagger: 0.1, ease: "power2.out",
+        scrollTrigger: { trigger: delivs[0].parentElement, start: "top 80%" } }
+    );
+  }
+
+  // Team cards → stagger con scale
+  const teamCards = Array.from(document.querySelectorAll(".team-card"));
+  if (teamCards.length) {
+    teamCards.forEach((t) => handled.add(t));
+    gsap.fromTo(teamCards,
+      { opacity: 0, y: 40, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: teamCards[0].parentElement, start: "top 82%" } }
+    );
+  }
+
+  // Instituciones grid → stagger
+  const instCards = Array.from(document.querySelectorAll(".inst-card"));
+  if (instCards.length) {
+    instCards.forEach((c) => handled.add(c));
+    gsap.fromTo(instCards,
+      { opacity: 0, y: 30, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08, ease: "power2.out",
+        scrollTrigger: { trigger: instCards[0].parentElement, start: "top 82%" } }
+    );
+  }
+
+  // Resto de [data-reveal]
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    if (handled.has(el)) return;
+    handled.add(el);
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" } }
+    );
+  });
+
+  // RED DE SEGURIDAD GSAP (2026-07-02): si ScrollTrigger no dispara (iframes,
+  // visores embebidos), los elementos animados con fromTo(opacity:0) quedarían
+  // invisibles PARA SIEMPRE. A los 1.8s, todo lo que siga oculto se muestra.
+  setTimeout(() => {
+    handled.forEach((el) => {
+      try {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
+          gsap.set(el, { opacity: 1, y: 0, x: 0, scale: 1, clearProps: "transform" });
+        }
+      } catch (e) {}
+    });
+  }, 1800);
+
+  // CountUp animado en stats
+  const statVals = document.querySelectorAll(".stat__val[data-countup]");
+  statVals.forEach((el) => {
+    const end = parseFloat(el.getAttribute("data-countup")) || 0;
+    const suffix = el.getAttribute("data-suffix") || "";
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: end,
+      duration: 1.8,
+      ease: "power2.out",
+      onUpdate() { el.textContent = Math.round(obj.val) + suffix; },
+      scrollTrigger: { trigger: el.closest(".stats"), start: "top 82%", once: true },
+    });
+  });
+
+  // Parallax del hero background
+  const heroBg = document.querySelector(".hero__bg");
+  if (heroBg) {
+    gsap.to(heroBg, {
+      yPercent: 28, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1.2 },
+    });
+  }
+}
+
+function setupTyped() {
+  if (typeof Typed === "undefined") return;
+  const el = document.getElementById("typedTarget");
+  if (!el) return;
+
+  const page = getPage();
+  const strings = page === "trabajos"
+    ? ["informe académico", "ensayo", "monografía", "caso de estudio", "presentación", "Excel y reportes", "dashboard en Power BI", "programación"]
+    : ["tesis", "trabajos de grado", "proyectos de grado", "monografías", "artículos científicos", "informes académicos"];
+
+  new Typed("#typedTarget", {
+    strings: strings,
+    typeSpeed: 60,
+    backSpeed: 35,
+    backDelay: 1600,
+    startDelay: 900,
+    loop: true,
+    showCursor: true,
+    cursorChar: "|",
+  });
+}
+
+function setupSwiper() {
+  if (typeof Swiper === "undefined") return;
+  if (!document.querySelector(".reviews-swiper")) return;
+  new Swiper(".reviews-swiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
+    loop: true,
+    coverflowEffect: {
+      rotate: 18,
+      stretch: 0,
+      depth: 120,
+      modifier: 1.2,
+      slideShadows: false,
+    },
+    autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
+    pagination: { el: ".reviews-pagination", clickable: true },
+    speed: 700,
+  });
+}
+
+function setupParticles() {
+  if (typeof particlesJS === "undefined") return;
+  if (!document.getElementById("hero-particles")) return;
+  particlesJS("hero-particles", {
+    particles: {
+      number: { value: 110, density: { enable: true, value_area: 800 } },
+      color: { value: ["#F7C948", "#FFD54F", "#E5B52E"] },
+      shape: { type: "circle" },
+      opacity: { value: 0.55, random: true, anim: { enable: true, speed: 1.2, opacity_min: 0.15, sync: false } },
+      size: { value: 3.2, random: true, anim: { enable: true, speed: 2, size_min: 0.8, sync: false } },
+      line_linked: { enable: true, distance: 150, color: "#F7C948", opacity: 0.15, width: 1 },
+      move: { enable: true, speed: 1.8, direction: "none", random: true, straight: false, out_mode: "out", bounce: false },
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: { onhover: { enable: false }, onclick: { enable: false }, resize: true },
+    },
+    retina_detect: true,
+  });
+}
+
+function setupTilt() {
+  if (typeof VanillaTilt === "undefined") return;
+  const cards = document.querySelectorAll(".card");
+  VanillaTilt.init(cards, {
+    max: 6,
+    speed: 500,
+    glare: true,
+    "max-glare": 0.12,
+    gyroscope: false,
+    scale: 1.02,
+  });
+}
+
+function setupNavScroll() {
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+  const onScroll = () => {
+    if (window.scrollY > 60) nav.classList.add("nav--scrolled");
+    else nav.classList.remove("nav--scrolled");
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  bindConfig();
+  bindWhatsAppLinks();
+  setupMobileMenu();
+  setupScrollProgress();
+  setupScrollSpy();
+  setupNavScroll();
+  setupGSAP();
+  setupAccordions();
+  setupFaqSearch();
+  setupForm();
+  setupCopyWhatsApp();
+  setupToTop();
+  setupYear();
+  setupTyped();
+  setupSwiper();
+  setupParticles();
+  setupTilt();
+  setupPromoToasts();
+  setupTabTitle();
+});
+
+function setupPromoToasts() {
+  const messages = [
+    { title: "¿Tienes un trabajo difícil?", text: "Acá te ayudamos. Escríbenos por WhatsApp." },
+    { title: "¿Llegas justo?", text: "Hacemos trabajos urgentes. Cotiza en 1 hora." },
+    { title: "Alguien acaba de cotizar", text: "Tú también puedes. Es gratis y sin compromiso." },
+    { title: "¿Tarea para mañana?", text: "Tranquilo, lo resolvemos. Mándanos la consigna." },
+    { title: "+500 trabajos entregados", text: "Estudiantes de la Nacional, la Javeriana, la Distrital y más confían en nosotros." },
+    { title: "¿Parcial o final?", text: "Te ayudamos a prepararlo. Escríbenos por WhatsApp." },
+    { title: "Cotización gratuita", text: "Mándanos los requisitos y te respondemos enseguida." },
+    { title: "Excel, Power BI, SQL...", text: "Lo que necesites, lo hacemos. Consulta sin cargo." },
+  ];
+
+  const toast = document.getElementById("promoToast");
+  if (!toast) return;
+
+  const titleEl = toast.querySelector(".promo-toast__text strong");
+  const textEl = toast.querySelector(".promo-toast__text span");
+  const closeBtn = toast.querySelector(".promo-toast__close");
+
+  if (!titleEl || !textEl) return;
+
+  let index = Math.floor(Math.random() * messages.length);
+  let timeout;
+
+  function showToast() {
+    const msg = messages[index];
+    titleEl.textContent = msg.title;
+    textEl.textContent = msg.text;
+    toast.classList.add("show");
+
+    timeout = setTimeout(() => {
+      toast.classList.remove("show");
+      index = (index + 1) % messages.length;
+      timeout = setTimeout(showToast, 12000 + Math.random() * 8000);
+    }, 6000);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      toast.classList.remove("show");
+      clearTimeout(timeout);
+      timeout = setTimeout(showToast, 20000);
+    });
+  }
+
+  setTimeout(showToast, 8000);
+}
+
+function setupTabTitle() {
+  const titles = [
+    "Tareapp | Hacemos tus tareas y trabajos",
+    "¿Tienes una tarea difícil? 📚",
+    "No dudes en escribirnos 💬",
+    "Cotiza gratis por WhatsApp",
+    "Entrega rápida garantizada ⚡",
+    "¡Te ayudamos hoy mismo!",
+    "Trabajos, informes, tareas y más",
+    "Respuesta inmediata por WhatsApp",
+  ];
+
+  const awayTitle = "¡Vuelve! Te esperamos 👋 Tareapp Colombia";
+
+  let index = 0;
+  let interval;
+
+  function rotate() {
+    document.title = titles[index];
+    index = (index + 1) % titles.length;
+  }
+
+  interval = setInterval(rotate, 3500);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      clearInterval(interval);
+      document.title = awayTitle;
+    } else {
+      rotate();
+      interval = setInterval(rotate, 3500);
+    }
+  });
+}
+
+/* --- Modo revision (comparador AGS): ?revisar=1 abre TODO lo desplegable para verlo sin clic --- */
+(function(){
+  if (!/[?&]revisar=1/.test(location.search)) return;
+  function _expandir(){
+    // 1) FAQ y acordeones
+    document.querySelectorAll("details").forEach(function(d){ d.open = true; });
+    document.querySelectorAll(".accordion__item,.accordion,.faq__item").forEach(function(a){ a.classList.add("is-open","active","open"); });
+    document.querySelectorAll(".accordion__panel,.faq__answer,[data-accordion-panel]").forEach(function(p){ p.hidden=false; p.style.maxHeight="none"; p.style.display="block"; });
+    // 2) MATRIZ DE PRECIOS: pulsar cada nivel y apilar todos los precios visibles
+    var grid = document.getElementById("pricingGrid");
+    var tabs = document.querySelectorAll("[data-tab]");
+    if (grid && tabs.length && !grid.dataset.revExpandido){
+      grid.dataset.revExpandido = "1";
+      var cont = document.createElement("div");
+      tabs.forEach(function(btn){
+        try { btn.click(); } catch(e){}
+        var sec = document.createElement("div");
+        sec.style.margin = "10px 0 26px";
+        var h = document.createElement("div");
+        h.textContent = btn.textContent.trim();
+        h.style.cssText = "text-align:center;font-weight:800;font-size:17px;margin:8px 0 14px;padding-top:10px;border-top:2px dashed rgba(0,0,0,.12)";
+        sec.appendChild(h);
+        var copia = grid.cloneNode(true);
+        copia.removeAttribute("id");
+        sec.appendChild(copia);
+        cont.appendChild(sec);
+      });
+      grid.parentNode.insertBefore(cont, grid);
+      grid.style.display = "none";
+    }
+    // 3) forzar visibles cosas con animacion de entrada
+    document.querySelectorAll("[data-reveal],.p-card,.reveal").forEach(function(el){ el.style.opacity="1"; el.style.transform="none"; });
+  }
+  if (document.readyState !== "loading") _expandir(); else document.addEventListener("DOMContentLoaded", _expandir);
+  setTimeout(_expandir, 1100);
+})();
