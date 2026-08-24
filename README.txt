@@ -11,7 +11,11 @@ Lo que es PROPIO de Colombia (no copiar de otro pais)
 - WhatsApp: +57 2 620 7344  (wa.me/5726207344). Va en app.js -> CONFIG.
   LEY AGS: cada pais tiene su numero Y su dominio. Nunca los de otro pais.
 - Ciudad: Bogota. Moneda: COP (formato es-CO).
-- Universidades: las de Bogota, en chips de TEXTO (no usamos logos ajenos).
+- Universidades: las de Bogota, con su LOGO en /assets/logos/ (orden de Joseph
+  23-ago-2026, igual que la web de Chile). Fuente: Wikipedia/Wikimedia y el sitio
+  oficial (Externado y Central). Se bajan y preparan con
+  E:\DevCoordinador\scratch_colombia\logos_co_bajar.py (PNG dentro de 600x165 = 3x
+  de la caja CSS .inst-chip img).
 - Precios: /precios/ (matriz de tesis) y /precios-trabajos/.
   Los valores salen del molde chileno x 4,2 (cambio del 2026-08-02) redondeados
   hacia arriba al siguiente $10.000, conservando los mismos saltos porcentuales.
