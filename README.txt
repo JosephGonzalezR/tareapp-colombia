@@ -17,10 +17,18 @@ Lo que es PROPIO de Colombia (no copiar de otro pais)
   E:\DevCoordinador\scratch_colombia\logos_co_bajar.py (PNG dentro de 600x165 = 3x
   de la caja CSS .inst-chip img).
 - Precios: /precios/ (matriz de tesis) y /precios-trabajos/.
-  Los valores salen del molde chileno x 4,2 (cambio del 2026-08-02) redondeados
-  hacia arriba al siguiente $10.000, conservando los mismos saltos porcentuales.
+  REGLA (Joseph, 23 y 24-ago-2026): "al tipo de cambio manejaremos mismos
+  precios". Colombia paga lo MISMO que Chile, convertido al tipo de cambio REAL,
+  redondeado hacia arriba (los saltos porcentuales entre planes se conservan).
+  * Trabajo corto $46.000 = los 15 USD del ancla (1 USD = 3.058,67 COP), a la mil.
+  * Trabajo de grado = escala chilena x 3,3177 (COP/CLP del 24-ago), al $10.000.
+    Antes salia de un x 4,2 inventado el 02-ago: cobraba 26,6% de mas y se
+    corrigio el 24-ago (tecnico 630.000 -> 500.000, doctorado Elite
+    9.980.000 -> 7.880.000). El calculo y sus 6 verificaciones estan en
+    E:\DevCoordinador\scratch_colombia\precios_tesis_co.py
   Para cambiarlos: objeto "bases" en /precios/index.html (un solo lugar) y el
-  monto de trabajo corto en /precios-trabajos/index.html.
+  monto de trabajo corto en /precios-trabajos/index.html. En el Sistema Central
+  hay que espejar Config.TIPOS_TRABAJO_PRECIO["CO"] y MONTOS_FRECUENTES["CO"].
 
 Pendientes conocidos (no inventar nada de esto)
 -----------------------------------------------
