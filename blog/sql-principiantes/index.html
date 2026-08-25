@@ -149,7 +149,7 @@
 
         <h2 id="que-es-sql">Que es SQL y para que se usa</h2>
 
-        <p>SQL (Structured Query Language, o Lenguaje de Consulta Estructurado) es el lenguaje estandar para interactuar con bases de datos relacionales. Si estas cursando Ingenieria en Informatica, Ingenieria Civil Industrial, Administracion o cualquier carrera que tenga un ramo de bases de datos, SQL es una de las herramientas mas importantes que vas a aprender.</p>
+        <p>SQL (Structured Query Language, o Lenguaje de Consulta Estructurado) es el lenguaje estandar para interactuar con bases de datos relacionales. Si estas cursando Ingenieria en Informatica, Ingenieria Industrial, Administracion o cualquier carrera que tenga una materia de bases de datos, SQL es una de las herramientas mas importantes que vas a aprender.</p>
 
         <p>Con SQL puedes hacer cuatro operaciones fundamentales sobre los datos, conocidas como <strong>CRUD</strong>:</p>
 
@@ -233,14 +233,14 @@ CREATE TABLE inscripciones (
 
 -- Insertar datos de ejemplo
 INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso) VALUES
-('Maria', 'Gonzalez', 'Ingenieria Comercial', 5, 5.8, '2024-03-01'),
-('Juan', 'Rodriguez', 'Ingenieria Civil', 3, 6.2, '2025-03-01'),
-('Camila', 'Lopez', 'Psicologia', 7, 6.5, '2023-03-01'),
-('Diego', 'Martinez', 'Ingenieria Comercial', 4, 4.9, '2024-08-01'),
-('Valentina', 'Silva', 'Derecho', 6, 5.5, '2023-08-01'),
-('Sebastian', 'Torres', 'Ingenieria Civil', 2, 6.0, '2025-08-01'),
-('Francisca', 'Muñoz', 'Psicologia', 4, 5.3, '2024-08-01'),
-('Matias', 'Diaz', 'Administracion', 8, 6.1, '2022-03-01');
+('Maria', 'Gonzalez', 'Administracion de Empresas', 5, 4.0, '2024-03-01'),
+('Juan', 'Rodriguez', 'Ingenieria Civil', 3, 4.4, '2025-03-01'),
+('Camila', 'Lopez', 'Psicologia', 7, 4.6, '2023-03-01'),
+('Diego', 'Martinez', 'Administracion de Empresas', 4, 3.3, '2024-08-01'),
+('Valentina', 'Silva', 'Derecho', 6, 3.8, '2023-08-01'),
+('Sebastian', 'Torres', 'Ingenieria Civil', 2, 4.2, '2025-08-01'),
+('Francisca', 'Muñoz', 'Psicologia', 4, 3.6, '2024-08-01'),
+('Matias', 'Diaz', 'Contaduria Publica', 8, 4.3, '2022-03-01');
 
 INSERT INTO cursos (nombre, creditos, profesor) VALUES
 ('Bases de Datos', 5, 'Prof. Soto'),
@@ -249,12 +249,12 @@ INSERT INTO cursos (nombre, creditos, profesor) VALUES
 ('Marketing Digital', 3, 'Prof. Vera');
 
 INSERT INTO inscripciones (estudiante_id, curso_id, nota, semestre) VALUES
-(1, 1, 5.5, '2026-1'), (1, 2, 6.0, '2026-1'),
-(2, 1, 6.8, '2026-1'), (2, 3, 5.9, '2026-1'),
-(3, 2, 6.3, '2026-1'), (4, 1, 4.2, '2026-1'),
-(4, 4, 5.1, '2026-1'), (5, 2, 5.7, '2026-1'),
-(6, 3, 6.4, '2026-1'), (7, 2, 4.8, '2026-1'),
-(8, 4, 6.0, '2026-1'), (8, 1, 5.9, '2026-1');</code></pre>
+(1, 1, 3.8, '2026-1'), (1, 2, 4.2, '2026-1'),
+(2, 1, 4.8, '2026-1'), (2, 3, 4.1, '2026-1'),
+(3, 2, 4.4, '2026-1'), (4, 1, 2.7, '2026-1'),
+(4, 4, 3.4, '2026-1'), (5, 2, 3.9, '2026-1'),
+(6, 3, 4.5, '2026-1'), (7, 2, 3.2, '2026-1'),
+(8, 4, 4.2, '2026-1'), (8, 1, 4.1, '2026-1');</code></pre>
 
         <h2 id="select-consulta">SELECT: tu primera consulta</h2>
 
@@ -284,21 +284,21 @@ FROM estudiantes;</code></pre>
 
         <p>La clausula <code>WHERE</code> te permite filtrar las filas que cumplan una condicion. Es como decir "dame solo los registros que cumplan con esto".</p>
 
-        <pre><code>-- Estudiantes de Ingenieria Comercial
+        <pre><code>-- Estudiantes de Administracion de Empresas
 SELECT nombre, apellido, promedio
 FROM estudiantes
-WHERE carrera = 'Ingenieria Comercial';
+WHERE carrera = 'Administracion de Empresas';
 
--- Estudiantes con promedio mayor a 6.0
+-- Estudiantes con promedio mayor a 4.2
 SELECT nombre, apellido, promedio
 FROM estudiantes
-WHERE promedio > 6.0;
+WHERE promedio > 4.2;
 
 -- Combinar condiciones con AND y OR
 SELECT nombre, apellido, carrera, promedio
 FROM estudiantes
 WHERE carrera = 'Ingenieria Civil'
-  AND promedio >= 6.0;
+  AND promedio >= 4.2;
 
 -- Estudiantes que NO son de Psicologia
 SELECT nombre, apellido, carrera
@@ -313,12 +313,12 @@ WHERE apellido LIKE 'M%';    -- Apellidos que empiezan con M
 -- Buscar en una lista de valores con IN
 SELECT nombre, apellido, carrera
 FROM estudiantes
-WHERE carrera IN ('Derecho', 'Psicologia', 'Administracion');
+WHERE carrera IN ('Derecho', 'Psicologia', 'Contaduria Publica');
 
 -- Buscar en un rango con BETWEEN
 SELECT nombre, apellido, promedio
 FROM estudiantes
-WHERE promedio BETWEEN 5.0 AND 6.0;</code></pre>
+WHERE promedio BETWEEN 3.5 AND 4.5;</code></pre>
 
         <div class="article-tip article-tip--warn">
           <div class="article-tip__icon">
@@ -392,13 +392,13 @@ GROUP BY carrera
 ORDER BY promedio_carrera DESC;
 
 -- Filtrar grupos con HAVING
--- (carreras con promedio superior a 5.5)
+-- (carreras con promedio superior a 4.0)
 SELECT carrera,
        COUNT(*) AS cantidad,
        AVG(promedio) AS promedio_carrera
 FROM estudiantes
 GROUP BY carrera
-HAVING AVG(promedio) > 5.5
+HAVING AVG(promedio) > 4.0
 ORDER BY promedio_carrera DESC;</code></pre>
 
         <div class="article-tip article-tip--warn">
@@ -460,17 +460,17 @@ ORDER BY promedio_notas DESC;</code></pre>
 
         <pre><code>-- INSERT: agregar un nuevo estudiante
 INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso)
-VALUES ('Antonia', 'Rojas', 'Ingenieria Comercial', 1, 0.0, '2026-03-01');
+VALUES ('Antonia', 'Rojas', 'Administracion de Empresas', 1, 0.0, '2026-03-01');
 
 -- INSERT multiple: agregar varios registros a la vez
 INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso)
 VALUES
-    ('Felipe', 'Castro', 'Derecho', 2, 5.4, '2025-08-01'),
+    ('Felipe', 'Castro', 'Derecho', 2, 3.7, '2025-08-01'),
     ('Isidora', 'Vargas', 'Psicologia', 1, 0.0, '2026-03-01');
 
 -- UPDATE: modificar el promedio de un estudiante
 UPDATE estudiantes
-SET promedio = 5.2, semestre = 2
+SET promedio = 3.5, semestre = 2
 WHERE id = 9;
 
 -- DELETE: eliminar un estudiante
@@ -524,7 +524,7 @@ LIMIT 1;</code></pre>
           <li><strong>Facil:</strong> Lista todos los estudiantes de Psicologia ordenados por promedio de mayor a menor.</li>
           <li><strong>Facil:</strong> Cuenta cuantos cursos tiene cada profesor.</li>
           <li><strong>Medio:</strong> Muestra el nombre de cada estudiante junto con la cantidad de cursos en los que esta inscrito.</li>
-          <li><strong>Medio:</strong> Encuentra los estudiantes que tienen al menos una nota inferior a 5.0.</li>
+          <li><strong>Medio:</strong> Encuentra los estudiantes que tienen al menos una nota inferior a 3.0.</li>
           <li><strong>Avanzado:</strong> Para cada carrera, muestra el estudiante con mejor promedio.</li>
         </ol>
 
@@ -551,7 +551,7 @@ ORDER BY cursos_inscritos DESC;
 SELECT DISTINCT e.nombre, e.apellido
 FROM estudiantes e
 JOIN inscripciones i ON e.id = i.estudiante_id
-WHERE i.nota < 5.0;
+WHERE i.nota < 3.0;
 
 -- Respuesta 5:
 SELECT e.nombre, e.apellido, e.carrera, e.promedio

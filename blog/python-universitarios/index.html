@@ -207,16 +207,16 @@ print("Estoy aprendiendo Python en la universidad")</code></pre>
         <pre><code># Variables de texto (strings)
 nombre = "Maria"
 universidad = "Universidad Nacional de Colombia"
-carrera = 'Ingenieria Comercial'  # Comillas simples o dobles, ambas funcionan
+carrera = 'Administracion de Empresas'  # Comillas simples o dobles, ambas funcionan
 
 # Variables numericas
 edad = 21                  # int (numero entero)
-promedio = 6.2             # float (numero decimal)
+promedio = 4.2             # float (numero decimal)
 semestre = 5               # int
 
 # Variables booleanas (verdadero o falso)
 esta_matriculado = True
-debe_ramos = False
+debe_materias = False
 
 # Imprimir variables
 print(f"Hola, soy {nombre}")
@@ -257,7 +257,7 @@ nombre_completo = "Maria" + " " + "Gonzalez"  # Concatenacion
 print("Hola " * 3)  # "Hola Hola Hola " (repeticion)
 
 # Conversion de tipos
-nota_texto = "6.5"
+nota_texto = "4.5"
 nota_numero = float(nota_texto)  # Convertir string a float
 edad_texto = str(21)             # Convertir int a string
 
@@ -271,9 +271,9 @@ print(f"Hola {nombre}, tienes {edad} anos")</code></pre>
         <p>Los condicionales te permiten que tu programa tome decisiones basadas en condiciones. La estructura basica es:</p>
 
         <pre><code># Condicional simple
-nota = 5.5
+nota = 4.5
 
-if nota >= 4.0:
+if nota >= 3.0:
     print("Aprobaste!")
 else:
     print("Reprobaste :(")
@@ -281,25 +281,25 @@ else:
 # Condicional con multiples opciones
 nota = float(input("Ingresa tu nota: "))
 
-if nota >= 6.5:
+if nota >= 4.5:
     print("Excelente! Nota sobresaliente")
-elif nota >= 5.5:
-    print("Muy bien! Nota sobre el promedio")
 elif nota >= 4.0:
+    print("Muy bien! Nota sobre el promedio")
+elif nota >= 3.0:
     print("Aprobaste, pero puedes mejorar")
-elif nota >= 1.0:
+elif nota >= 0.0:
     print("Reprobaste. Necesitas estudiar mas")
 else:
     print("Nota no valida")
 
 # Condiciones combinadas con and, or, not
 edad = 20
-promedio = 6.0
+promedio = 4.0
 
-if edad >= 18 and promedio >= 5.0:
+if edad >= 18 and promedio >= 4.0:
     print("Puedes postular a la beca")
 
-if edad < 18 or promedio < 4.0:
+if edad < 18 or promedio < 3.0:
     print("No cumples los requisitos")
 
 if not esta_matriculado:
@@ -320,10 +320,10 @@ if not esta_matriculado:
         <p>Los bucles te permiten repetir acciones multiples veces sin copiar y pegar codigo:</p>
 
         <pre><code># Bucle for: recorrer una secuencia
-ramos = ["Calculo", "Fisica", "Programacion", "Estadistica"]
+materias = ["Calculo", "Fisica", "Programacion", "Estadistica"]
 
-for ramo in ramos:
-    print(f"Estoy cursando {ramo}")
+for materia in materias:
+    print(f"Estoy cursando {materia}")
 
 # for con range: repetir N veces
 for i in range(5):
@@ -334,8 +334,8 @@ for i in range(1, 8):
     print(f"Semestre {i}")  # Imprime 1 a 7
 
 # for con enumerate: indice + valor
-for i, ramo in enumerate(ramos, start=1):
-    print(f"{i}. {ramo}")
+for i, materia in enumerate(materias, start=1):
+    print(f"{i}. {materia}")
 
 # Bucle while: repetir mientras se cumpla una condicion
 intentos = 0
@@ -369,17 +369,17 @@ def calcular_promedio(notas):
         return 0
     return sum(notas) / len(notas)
 
-mis_notas = [5.5, 6.0, 4.8, 6.3, 5.9]
+mis_notas = [4.5, 3.8, 4.2, 3.5, 4.8]
 promedio = calcular_promedio(mis_notas)
 print(f"Tu promedio es: {promedio:.1f}")
 
 # Funcion con parametros por defecto
-def calcular_nota_final(certamen1, certamen2, examen, pond_cert=0.3, pond_exam=0.4):
+def calcular_nota_final(parcial1, parcial2, examen, pond_parc=0.3, pond_exam=0.4):
     """Calcula la nota final con ponderaciones."""
-    nota = certamen1 * pond_cert + certamen2 * pond_cert + examen * pond_exam
+    nota = parcial1 * pond_parc + parcial2 * pond_parc + examen * pond_exam
     return round(nota, 1)
 
-nota_final = calcular_nota_final(5.5, 6.0, 5.8)
+nota_final = calcular_nota_final(4.5, 3.8, 4.2)
 print(f"Nota final: {nota_final}")
 
 # Funcion que retorna multiples valores
@@ -407,31 +407,31 @@ print(f"Promedio: {promedio:.1f}, Mejor: {mejor}, Peor: {peor}")</code></pre>
         <h3>Listas</h3>
 
         <pre><code># Crear listas
-notas = [5.5, 6.0, 4.8, 6.3, 5.9]
-ramos = ["Calculo", "Fisica", "Programacion"]
-mixta = ["Maria", 21, 6.2, True]  # Puede mezclar tipos
+notas = [4.5, 3.8, 4.2, 3.5, 4.8]
+materias = ["Calculo", "Fisica", "Programacion"]
+mixta = ["Maria", 21, 4.2, True]  # Puede mezclar tipos
 
 # Acceder a elementos (indice empieza en 0)
-print(notas[0])    # 5.5 (primer elemento)
-print(notas[-1])   # 5.9 (ultimo elemento)
-print(notas[1:3])  # [6.0, 4.8] (sublista)
+print(notas[0])    # 4.5 (primer elemento)
+print(notas[-1])   # 4.8 (ultimo elemento)
+print(notas[1:3])  # [3.8, 4.2] (sublista)
 
 # Modificar elementos
-notas[0] = 5.8
-ramos.append("Estadistica")      # Agregar al final
-ramos.insert(0, "Algebra")       # Insertar en posicion 0
-ramos.remove("Fisica")           # Eliminar por valor
+notas[0] = 4.6
+materias.append("Estadistica")   # Agregar al final
+materias.insert(0, "Algebra")    # Insertar en posicion 0
+materias.remove("Fisica")        # Eliminar por valor
 ultimo = notas.pop()              # Eliminar y retornar el ultimo
 
 # Operaciones utiles
 print(len(notas))        # 4 (cantidad de elementos)
-print(sum(notas))        # 22.9 (suma total)
+print(sum(notas))        # 16.1 (suma total)
 print(sorted(notas))     # Lista ordenada (no modifica la original)
 notas.sort()             # Ordena la lista original
-print(4.8 in notas)      # True (verificar si existe)
+print(4.2 in notas)      # True (verificar si existe)
 
 # List comprehension (forma elegante de crear listas)
-notas_aprobadas = [n for n in notas if n >= 4.0]
+notas_aprobadas = [n for n in notas if n >= 3.0]
 notas_redondeadas = [round(n) for n in notas]
 cuadrados = [x**2 for x in range(1, 11)]</code></pre>
 
@@ -440,9 +440,9 @@ cuadrados = [x**2 for x in range(1, 11)]</code></pre>
         <pre><code># Crear diccionarios (pares clave: valor)
 estudiante = {
     "nombre": "Maria Gonzalez",
-    "carrera": "Ingenieria Comercial",
+    "carrera": "Administracion de Empresas",
     "semestre": 5,
-    "promedio": 6.2,
+    "promedio": 4.2,
     "becado": True
 }
 
@@ -451,27 +451,27 @@ print(estudiante["nombre"])           # "Maria Gonzalez"
 print(estudiante.get("email", "No registrado"))  # Valor por defecto
 
 # Modificar y agregar
-estudiante["promedio"] = 6.3
+estudiante["promedio"] = 4.3
 estudiante["email"] = "maria@unal.edu.co"
 
 # Recorrer un diccionario
 for clave, valor in estudiante.items():
     print(f"{clave}: {valor}")
 
-# Diccionario de notas por ramo
-notas_por_ramo = {
-    "Calculo": [5.5, 6.0, 5.8],
-    "Fisica": [4.8, 5.2, 5.0],
-    "Programacion": [6.5, 6.8, 7.0]
+# Diccionario de notas por materia
+notas_por_materia = {
+    "Calculo": [4.5, 3.8, 4.2],
+    "Fisica": [3.8, 4.1, 4.0],
+    "Programacion": [4.6, 4.8, 5.0]
 }
 
-for ramo, notas in notas_por_ramo.items():
+for materia, notas in notas_por_materia.items():
     promedio = sum(notas) / len(notas)
-    print(f"{ramo}: promedio {promedio:.1f}")</code></pre>
+    print(f"{materia}: promedio {promedio:.1f}")</code></pre>
 
         <h2 id="proyecto-calculadora">Tu primer proyecto: calculadora de notas</h2>
 
-        <p>Vamos a juntar todo lo que aprendiste en un proyecto practico: una calculadora de notas universitarias. Este programa calcula tu promedio ponderado y te dice si apruebas el ramo:</p>
+        <p>Vamos a juntar todo lo que aprendiste en un proyecto practico: una calculadora de notas universitarias. Este programa calcula tu promedio ponderado y te dice si apruebas la materia:</p>
 
         <pre><code>def calculadora_notas():
     """Calculadora de notas universitarias con ponderaciones."""
@@ -480,7 +480,7 @@ for ramo, notas in notas_por_ramo.items():
     print("  CALCULADORA DE NOTAS UNIVERSITARIAS")
     print("=" * 50)
 
-    ramo = input("\nNombre del ramo: ")
+    materia = input("\nNombre de la materia: ")
 
     # Pedir evaluaciones y ponderaciones
     evaluaciones = []
@@ -496,10 +496,10 @@ for ramo, notas in notas_por_ramo.items():
                 continue
             break
 
-        nota = float(input(f"Nota de {nombre_eval} (1.0 - 7.0): "))
-        while nota < 1.0 or nota > 7.0:
-            print("Nota no valida. Debe estar entre 1.0 y 7.0")
-            nota = float(input(f"Nota de {nombre_eval} (1.0 - 7.0): "))
+        nota = float(input(f"Nota de {nombre_eval} (0.0 - 5.0): "))
+        while nota < 0.0 or nota > 5.0:
+            print("Nota no valida. Debe estar entre 0.0 y 5.0")
+            nota = float(input(f"Nota de {nombre_eval} (0.0 - 5.0): "))
 
         ponderacion = int(input(f"Ponderacion de {nombre_eval} (%): "))
         while ponderacion_total + ponderacion > 100:
@@ -518,7 +518,7 @@ for ramo, notas in notas_por_ramo.items():
 
     # Mostrar resultados
     print("\n" + "=" * 50)
-    print(f"  RESULTADOS - {ramo.upper()}")
+    print(f"  RESULTADOS - {materia.upper()}")
     print("=" * 50)
 
     for e in evaluaciones:
@@ -529,16 +529,16 @@ for ramo, notas in notas_por_ramo.items():
     print(f"  NOTA FINAL: {nota_final:.1f}")
     print("-" * 50)
 
-    if nota_final >= 4.0:
+    if nota_final >= 3.0:
         print("  APROBADO!")
-        if nota_final >= 6.0:
+        if nota_final >= 4.5:
             print("  Excelente rendimiento!")
     else:
         print("  REPROBADO")
-        nota_necesaria = (4.0 * 100 - sum(
+        nota_necesaria = (3.0 * 100 - sum(
             e["nota"] * e["ponderacion"] for e in evaluaciones[:-1]
         )) / evaluaciones[-1]["ponderacion"]
-        if 1.0 <= nota_necesaria <= 7.0:
+        if 0.0 <= nota_necesaria <= 5.0:
             print(f"  Necesitabas un {nota_necesaria:.1f} en {evaluaciones[-1]['nombre']}")
 
 # Ejecutar la calculadora
@@ -565,7 +565,7 @@ print(datos.head())
 print(datos.describe())
 
 # Filtrar datos
-aprobados = datos[datos["nota"] >= 4.0]
+aprobados = datos[datos["nota"] >= 3.0]
 
 # Agrupar y calcular
 promedio_por_carrera = datos.groupby("carrera")["nota"].mean()
