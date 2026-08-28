@@ -47,6 +47,14 @@
     .ev-lb-prev { left:18px; top:50%; transform:translateY(-50%); }
     .ev-lb-next { right:18px; top:50%; transform:translateY(-50%); }
     @media(max-width:520px){ .ev-lb-prev{left:6px} .ev-lb-next{right:6px} .ev-lb-btn{width:42px;height:42px} }
+
+    /* Titulo de seccion (galeria de comprobantes y garantias) 27-ago-2026 */
+    .ref-pagos { max-width:980px; margin:0 auto clamp(14px,2vw,20px); text-align:center; }
+    .ref-pagos h2 { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--text); margin-bottom:8px; }
+    .ref-pagos p { color:#242424; font-size:16px; max-width:620px; margin:0 auto; line-height:1.6; }
+    /* Con pocos comprobantes la rejilla no debe estirarlos a lo ancho */
+    .ev-grid { justify-content:center; }
+    .ev-item { max-width:340px; width:100%; margin:0 auto; }
   </style>
   <!-- AGS-GEO (Dev Central) — no editar a mano: lo genera herramientas/geo_webs.py -->
   <link rel="canonical" href="https://tareapp.colombia.ags-ed.com/referencias/" />
@@ -191,6 +199,21 @@
         <div class="badge">Respaldo</div>
         <h1>Con qué respaldamos tu trabajo</h1>
         <p>Estamos abriendo en Colombia. Estas son las garantías con las que trabajamos desde el primer pedido, las mismas que aplicamos con estudiantes de otros países desde 2023.</p>
+      </div>
+
+      <div class="ref-pagos">
+        <h2>Pagos que ya recibimos en Colombia</h2>
+        <p>Comprobantes reales de estudiantes colombianos que ya trabajaron con
+           nosotros. Toca cualquier imagen para verla en grande.</p>
+      </div>
+
+      <div class="ev-grid">
+        <button class="ev-item" type="button" aria-label="Ver comprobante 1"><img src="/assets/referencias/ref-1.webp" loading="lazy" decoding="async" alt="Comprobante de pago de un cliente de Tareapp en Colombia" /></button>
+        <button class="ev-item" type="button" aria-label="Ver comprobante 2"><img src="/assets/referencias/ref-2.webp" loading="lazy" decoding="async" alt="Comprobante de pago de un cliente de Tareapp en Colombia" /></button>
+      </div>
+
+      <div class="ref-pagos">
+        <h2>Garant&iacute;as con las que trabajamos</h2>
       </div>
 
       <div class="cards cards--3">
