@@ -20,7 +20,8 @@ Lo que es PROPIO de Colombia (no copiar de otro pais)
   REGLA (Joseph, 23 y 24-ago-2026): "al tipo de cambio manejaremos mismos
   precios". Colombia paga lo MISMO que Chile, convertido al tipo de cambio REAL,
   redondeado hacia arriba (los saltos porcentuales entre planes se conservan).
-  * Trabajo corto $46.000 = los 15 USD del ancla (1 USD = 3.058,67 COP), a la mil.
+  * Trabajo corto $50.000 (7-oct-2026): los 15 USD del ancla al cambio fijo del 5-oct (3.308,76), en
+    multiplos de 5.000, lo mismo que el boton Cotizar; indice de precio por pais 99 (antes $46.000).
   * Trabajo de grado = escala chilena x 3,3177 (COP/CLP del 24-ago), al $10.000.
     Antes salia de un x 4,2 inventado el 02-ago: cobraba 26,6% de mas y se
     corrigio el 24-ago (tecnico 630.000 -> 500.000, doctorado Elite
