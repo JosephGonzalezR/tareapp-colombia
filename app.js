@@ -8,8 +8,8 @@
  */
 const CONFIG = {
   brand: "Tareapp",
-  whatsappNumber: "5726207344",
-  whatsappDisplay: "+57 2 620 7344",
+  whatsappNumber: "576019162978",
+  whatsappDisplay: "+57 601 916 2978",
   location: "Bogotá, Colombia",
   // Colombia todavía no tiene cuentas propias de redes sociales. Se dejan
   // vacías a propósito: NUNCA enlazar las cuentas de otro país.

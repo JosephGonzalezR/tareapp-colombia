@@ -8,7 +8,7 @@ Deploy:   push a main. GitHub Pages tarda 3 a 5 minutos.
 
 Lo que es PROPIO de Colombia (no copiar de otro pais)
 -----------------------------------------------------
-- WhatsApp: +57 2 620 7344  (wa.me/5726207344). Va en app.js -> CONFIG.
+- WhatsApp: +57 601 916 2978  (wa.me/576019162978). Va en app.js -> CONFIG.
   LEY AGS: cada pais tiene su numero Y su dominio. Nunca los de otro pais.
 - Ciudad: Bogota. Moneda: COP (formato es-CO).
 - Universidades: las de Bogota, con su LOGO en /assets/logos/ (orden de Joseph
