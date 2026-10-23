@@ -67,6 +67,17 @@
     .op-name { font-weight:800; color:var(--text); }
     .op-tag { display:inline-block; padding:3px 10px; border-radius:999px; background:var(--brand3); color:var(--brand-ink); border:1px solid rgba(229,181,46,.25); font-weight:700; font-size:12px; }
     .op-nota { max-width:720px; margin:0 auto clamp(40px,6vw,64px); text-align:center; font-size:13px; color:var(--muted); line-height:1.5; }
+    /* Comprobantes por mes, como en Chile (23-oct-2026) */
+    .ref-meses { max-width:980px; margin:6px auto clamp(40px,6vw,64px); }
+    .ref-anio { font-size:22px; font-weight:800; margin:26px 6px 10px; color:var(--text); }
+    .ref-mes { background:var(--card,#fff); border:1px solid rgba(0,0,0,.08); border-radius:16px; margin:10px 0; box-shadow:var(--shadow-sm); overflow:hidden; }
+    .ref-mes > summary { list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:16px 20px; font-weight:700; font-size:17px; color:var(--text); }
+    .ref-mes > summary::-webkit-details-marker { display:none; }
+    .ref-mes > summary::after { content:"+"; font-size:24px; line-height:1; color:var(--brand-ink); width:24px; text-align:center; }
+    .ref-mes[open] > summary::after { content:"\2212"; }
+    .ref-mes__n { margin-left:auto; font-weight:600; font-size:14px; color:var(--muted); }
+    .ref-mes .ev-grid { max-width:none; margin:2px 16px 18px; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:14px; }
+    @media(max-width:560px){ .ref-mes .ev-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:2px 10px 14px; } .ref-mes > summary{ padding:14px 16px; font-size:16px; } }
   </style>
   <!-- AGS-GEO (Dev Central) — no editar a mano: lo genera herramientas/geo_webs.py -->
   <link rel="canonical" href="https://tareapp.colombia.ags-ed.com/referencias/" />
@@ -240,13 +251,71 @@
       </div>
       <!-- EVIDENCIAS-CABECERA:FIN -->
 
-        <div class="ref-pagos">
+      <!-- PAGOS:INICIO (23-oct-2026: comprobantes reales con los datos tapados, tambien los nuestros; kit _scratch\evidencias_co_ar_20261023) -->
+      <div class="ref-pagos">
         <h2>Pagos que ya recibimos en Colombia</h2>
       </div>
-
-      <div class="ev-grid">
-        <button class="ev-item" type="button" aria-label="Ver comprobante 1"><img src="/assets/referencias/ref-1.webp" loading="lazy" decoding="async" alt="Comprobante de pago de un cliente de Tareapp en Colombia" /></button>
+      <div class="ref-meses">
+        <h2 class="ref-anio">2026</h2>
+        <details class="ref-mes" open>
+          <summary><span>Octubre 2026</span><span class="ref-mes__n">18 comprobantes</span></summary>
+          <div class="ev-grid">
+            <button class="ev-item" type="button" aria-label="Ver comprobante 1 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-01.webp" width="720" height="1357" loading="lazy" decoding="async" alt="Comprobante de pago de $50.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 2 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-02.webp" width="720" height="1476" loading="lazy" decoding="async" alt="Comprobante de pago de $48.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 3 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-03.webp" width="720" height="1357" loading="lazy" decoding="async" alt="Comprobante de pago de $35.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 4 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-04.webp" width="720" height="1357" loading="lazy" decoding="async" alt="Comprobante de pago de $35.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 5 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-05.webp" width="720" height="1357" loading="lazy" decoding="async" alt="Comprobante de pago de $35.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 6 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-06.webp" width="720" height="1235" loading="lazy" decoding="async" alt="Comprobante de pago de $30.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 7 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-07.webp" width="720" height="1476" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 8 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-08.webp" width="720" height="1476" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 9 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-09.webp" width="720" height="1235" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 10 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-10.webp" width="720" height="1235" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 11 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-11.webp" width="720" height="1476" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 12 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-12.webp" width="720" height="1476" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 13 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-13.webp" width="720" height="1235" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 14 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-14.webp" width="720" height="1235" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 15 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-15.webp" width="720" height="1212" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 16 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-16.webp" width="720" height="1141" loading="lazy" decoding="async" alt="Comprobante de pago de $25.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 17 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-17.webp" width="720" height="1560" loading="lazy" decoding="async" alt="Comprobante de pago de $17.000 a Tareapp, octubre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 18 de octubre 2026"><img src="/assets/referencias/meses/2026-10/ref-202610-18.webp" width="720" height="1560" loading="lazy" decoding="async" alt="Comprobante de pago de $17.000 a Tareapp, octubre 2026" /></button>
+          </div>
+        </details>
+        <details class="ref-mes">
+          <summary><span>Septiembre 2026</span><span class="ref-mes__n">18 comprobantes</span></summary>
+          <div class="ev-grid">
+            <button class="ev-item" type="button" aria-label="Ver comprobante 1 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-01.webp" width="720" height="1444" loading="lazy" decoding="async" alt="Comprobante de pago de $170.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 2 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-02.webp" width="720" height="1230" loading="lazy" decoding="async" alt="Comprobante de pago de $150.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 3 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-03.webp" width="720" height="1497" loading="lazy" decoding="async" alt="Comprobante de pago de $110.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 4 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-04.webp" width="720" height="1364" loading="lazy" decoding="async" alt="Comprobante de pago de $90.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 5 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-05.webp" width="720" height="1364" loading="lazy" decoding="async" alt="Comprobante de pago de $70.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 6 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-06.webp" width="720" height="1558" loading="lazy" decoding="async" alt="Comprobante de pago de $64.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 7 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-07.webp" width="720" height="1357" loading="lazy" decoding="async" alt="Comprobante de pago de $63.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 8 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-08.webp" width="720" height="1357" loading="lazy" decoding="async" alt="Comprobante de pago de $62.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 9 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-09.webp" width="720" height="1411" loading="lazy" decoding="async" alt="Comprobante de pago de $60.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 10 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-10.webp" width="720" height="1472" loading="lazy" decoding="async" alt="Comprobante de pago de $50.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 11 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-11.webp" width="720" height="1315" loading="lazy" decoding="async" alt="Comprobante de pago de $40.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 12 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-12.webp" width="720" height="2210" loading="lazy" decoding="async" alt="Comprobante de pago de $40.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 13 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-13.webp" width="720" height="1300" loading="lazy" decoding="async" alt="Comprobante de pago de $39.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 14 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-14.webp" width="720" height="1304" loading="lazy" decoding="async" alt="Comprobante de pago de $39.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 15 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-15.webp" width="720" height="1406" loading="lazy" decoding="async" alt="Comprobante de pago de $30.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 16 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-16.webp" width="720" height="1406" loading="lazy" decoding="async" alt="Comprobante de pago de $20.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 17 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-17.webp" width="720" height="1472" loading="lazy" decoding="async" alt="Comprobante de pago de $10.000 a Tareapp, septiembre 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 18 de septiembre 2026"><img src="/assets/referencias/meses/2026-09/ref-202609-18.webp" width="720" height="2210" loading="lazy" decoding="async" alt="Comprobante de pago de $10.000 a Tareapp, septiembre 2026" /></button>
+          </div>
+        </details>
+        <details class="ref-mes">
+          <summary><span>Agosto 2026</span><span class="ref-mes__n">6 comprobantes</span></summary>
+          <div class="ev-grid">
+            <button class="ev-item" type="button" aria-label="Ver comprobante 1 de agosto 2026"><img src="/assets/referencias/meses/2026-08/ref-202608-01.webp" width="720" height="1230" loading="lazy" decoding="async" alt="Comprobante de pago de $150.000 a Tareapp, agosto 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 2 de agosto 2026"><img src="/assets/referencias/meses/2026-08/ref-202608-02.webp" width="720" height="1411" loading="lazy" decoding="async" alt="Comprobante de pago de $47.000 a Tareapp, agosto 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 3 de agosto 2026"><img src="/assets/referencias/meses/2026-08/ref-202608-03.webp" width="720" height="1472" loading="lazy" decoding="async" alt="Comprobante de pago de $40.000 a Tareapp, agosto 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 4 de agosto 2026"><img src="/assets/referencias/meses/2026-08/ref-202608-04.webp" width="720" height="1200" loading="lazy" decoding="async" alt="Comprobante de pago de $40.000 a Tareapp, agosto 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 5 de agosto 2026"><img src="/assets/referencias/meses/2026-08/ref-202608-05.webp" width="720" height="1497" loading="lazy" decoding="async" alt="Comprobante de pago de $40.000 a Tareapp, agosto 2026" /></button>
+            <button class="ev-item" type="button" aria-label="Ver comprobante 6 de agosto 2026"><img src="/assets/referencias/meses/2026-08/ref-202608-06.webp" width="720" height="1472" loading="lazy" decoding="async" alt="Comprobante de pago de $10.000 a Tareapp, agosto 2026" /></button>
+          </div>
+        </details>
       </div>
+      <!-- PAGOS:FIN -->
 
       <!-- EVIDENCIAS-OBRAS:INICIO -->
       <section class="ev-obras" id="trabajos" aria-labelledby="t-trabajos">
@@ -355,18 +424,18 @@
           </div>
         </section>
         <!-- OPINIONES:FIN -->
-      <!-- NOTAS:INICIO (18-oct-2026: citas TAL CUAL de clientes de Chile que nos contaron su nota; fuente y codigos en _scratch\evidencias_sin_logos_20261018\notas_evidencias.py) -->
+      <!-- NOTAS:INICIO (18-oct-2026: citas con la nota pasada a la escala del pais (23-oct-2026) de clientes de Chile que nos contaron su nota; fuente y codigos en _scratch\evidencias_sin_logos_20261018\notas_evidencias.py) -->
       <section class="nt-wrap" aria-labelledby="nt-titulo">
         <div class="nt-cab"><h2 id="nt-titulo">Notas que nos contaron en Chile</h2></div>
         <div class="nt-grid">
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>7</b><span>de 7</span></p><blockquote class="nt-text"><p>Nos sacamos un 7,0</p><p>En la grabación del podcast de geología</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Podcast de geología</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>6,5</b><span>de 7</span></p><blockquote class="nt-text"><p>Hola, buenos días</p><p>Espero que estés bien, ayer recibí mi nota y tuve un 6.5</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Evaluación sumativa de Derecho laboral</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>6,3</b><span>de 7</span></p><blockquote class="nt-text"><p>Me saque un 6.3 en el primer avance lo encontraron bien</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Proyecto de salud, primer avance</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>7</b><span>de 7</span></p><blockquote class="nt-text"><p>Hola buenos días, quería comentarles que el profesor nos evaluó con nota 7</p><p>El trabajo que realizaron es sobresaliente</p><p>Muchas gracias y lo más probable que a futuro les siga pidiendo ayuda</p><p>100% recomendable</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2025</span><span class="nt-tag">Avance de tesis: introducción y marco teórico</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>6,5</b><span>de 7</span></p><blockquote class="nt-text"><p>Muchas gracias por el trabajo realizado lo calificaron con nota 6,5✌️</p><p>Pronto estaré solicitando sus servicios</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Introducción a la minería</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>6,7</b><span>de 7</span></p><blockquote class="nt-text"><p>Me saqué un 6.7</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Ensayo académico</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>7</b><span>de 7</span></p><blockquote class="nt-text"><p>Hola! Quería agradecerte. Hoy me subieron la nota y me saque un 7 ☺️</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">diciembre de 2024</span><span class="nt-tag">Investigación cualitativa de mercados</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><b>7</b><span>de 7</span></p><blockquote class="nt-text"><p>Holaa me entregaron la nota de portafolio y me fue súper Nota 7, muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2024</span><span class="nt-tag">Portafolio de filosofía</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>5</b><span>de 5</span></p><blockquote class="nt-text"><p>Nos sacamos un 5,0</p><p>En la grabación del podcast de geología</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Podcast de geología</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>4,7</b><span>de 5</span></p><blockquote class="nt-text"><p>Hola, buenos días</p><p>Espero que estés bien, ayer recibí mi nota y tuve un 4.7</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Evaluación sumativa de Derecho laboral</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>4,5</b><span>de 5</span></p><blockquote class="nt-text"><p>Me saque un 4.5 en el primer avance lo encontraron bien</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Proyecto de salud, primer avance</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>5</b><span>de 5</span></p><blockquote class="nt-text"><p>Hola buenos días, quería comentarles que el profesor nos evaluó con nota 5</p><p>El trabajo que realizaron es sobresaliente</p><p>Muchas gracias y lo más probable que a futuro les siga pidiendo ayuda</p><p>100% recomendable</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2025</span><span class="nt-tag">Avance de tesis: introducción y marco teórico</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>4,7</b><span>de 5</span></p><blockquote class="nt-text"><p>Muchas gracias por el trabajo realizado lo calificaron con nota 4,7✌️</p><p>Pronto estaré solicitando sus servicios</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Introducción a la minería</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>4,8</b><span>de 5</span></p><blockquote class="nt-text"><p>Me saqué un 4.8</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Ensayo académico</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>5</b><span>de 5</span></p><blockquote class="nt-text"><p>Hola! Quería agradecerte. Hoy me subieron la nota y me saque un 5 ☺️</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">diciembre de 2024</span><span class="nt-tag">Investigación cualitativa de mercados</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><b>5</b><span>de 5</span></p><blockquote class="nt-text"><p>Holaa me entregaron la nota de portafolio y me fue súper Nota 5, muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2024</span><span class="nt-tag">Portafolio de filosofía</span></figcaption></figure>
         </div>
       </section>
       <!-- NOTAS:FIN -->
