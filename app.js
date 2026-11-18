@@ -76,11 +76,12 @@ const CONFIG = {
   whatsappNumber: "576019162978",
   whatsappDisplay: "+57 601 916 2978",
   location: "Bogotá, Colombia",
-  // Colombia todavía no tiene cuentas propias de redes sociales. Se dejan
-  // vacías a propósito: NUNCA enlazar las cuentas de otro país.
-  facebookUrl: "",
-  tiktokUrl: "",
-  instagramUrl: "",
+  // 17-nov-2026: las cuentas de Colombia con MÁS seguidores, las mismas de la portada y de /links/ (LEY de
+  // Joseph del 17-nov: se enlaza la cuenta de cada red con más seguidores del país). Las usan los botones de
+  // /tesis/ (antes iban vacías y esos botones no llevaban a ningún lado). NUNCA las cuentas de otro país.
+  facebookUrl: "https://www.facebook.com/profile.php?id=61594205427336",
+  tiktokUrl: "https://www.tiktok.com/@tareapp_co",
+  instagramUrl: "https://www.instagram.com/tareapp_co/",
 
   // Indicadores (opcional). Si no deseas números, deja en "—".
   stat1Value: "300+",
